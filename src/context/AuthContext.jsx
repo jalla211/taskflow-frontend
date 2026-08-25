@@ -30,20 +30,13 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
     }, []);
 
+    // Direct login – no OTP
     const login = async (email, password) => {
         try {
             const response = await api.post('/login', { email, password });
-            return response.data;
-        } catch (error) {
-            throw error.response?.data || { message: 'Login failed' };
-        }
-    };
-
-    const verifyOtp = async (email, otp) => {
-        try {
-            const response = await api.post('/verify-otp', { email, otp });
             const { token, user } = response.data;
             
+            // Store token and user data
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
             api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -53,8 +46,14 @@ export const AuthProvider = ({ children }) => {
             
             return response.data;
         } catch (error) {
-            throw error.response?.data || { message: 'OTP verification failed' };
+            throw error.response?.data || { message: 'Login failed' };
         }
+    };
+
+    // (Optional) Keep verifyOtp for backward compatibility, but it won't be used
+    const verifyOtp = async (email, otp) => {
+        // This function is no longer needed – keep it empty or throw an error
+        throw new Error('OTP verification is disabled. Use direct login.');
     };
 
     const logout = async () => {

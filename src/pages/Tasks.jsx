@@ -76,25 +76,25 @@ const Tasks = () => {
         }
     };
 
-    const fetchStatuses = async () => {
-        try {
-            const response = await api.get('/admin/statuses');
-            setStatuses(Array.isArray(response.data) ? response.data : []);
-        } catch (err) {
-            console.error('Failed to load statuses:', err);
-            setStatuses([]);
-        }
-    };
+  const fetchStatuses = async () => {
+    try {
+        const response = await api.get('/task-statuses');   // changed from /admin/statuses
+        setStatuses(Array.isArray(response.data) ? response.data : []);
+    } catch (err) {
+        console.error('Failed to load statuses:', err);
+        setStatuses([]);
+    }
+};
 
-    const fetchPriorities = async () => {
-        try {
-            const response = await api.get('/admin/priorities');
-            setPriorities(Array.isArray(response.data) ? response.data : []);
-        } catch (err) {
-            console.error('Failed to load priorities:', err);
-            setPriorities([]);
-        }
-    };
+  const fetchPriorities = async () => {
+    try {
+        const response = await api.get('/task-priorities'); // changed from /admin/priorities
+        setPriorities(Array.isArray(response.data) ? response.data : []);
+    } catch (err) {
+        console.error('Failed to load priorities:', err);
+        setPriorities([]);
+    }
+};
 
     const handleSubmit = async (e) => {
         e.preventDefault();

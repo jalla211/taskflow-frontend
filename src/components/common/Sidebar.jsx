@@ -95,7 +95,7 @@ const Sidebar = () => {
           <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">
             {user?.profile_picture ? (
               <img
-                src={`/storage/${user.profile_picture}`}
+                src={`https://taskflow-backend-ck9g.onrender.com/storage/${user.profile_picture}`}
                 alt={user?.name}
                 className="w-full h-full object-cover"
                 onError={(e) => {

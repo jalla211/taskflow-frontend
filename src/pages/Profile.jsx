@@ -128,7 +128,7 @@ const Profile = () => {
                                     <img src={previewUrl} alt="Profile" className="w-full h-full object-cover" />
                                 ) : profilePicture ? (
                                     <img
-                                        src={`/storage/${profilePicture}`}
+                                        src={`https://taskflow-backend-ck9g.onrender.com/storage/${profilePicture}`}
                                         alt="Profile"
                                         className="w-full h-full object-cover"
                                     />

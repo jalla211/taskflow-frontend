@@ -20,10 +20,8 @@ const Users = () => {
         phone: '',
     });
 
-    // Check if user is admin directly
     const isAdmin = user?.role?.slug === 'admin';
 
-    // Only Admin can access
     if (!isAdmin) {
         return (
             <div className="p-6">
@@ -184,65 +182,66 @@ const Users = () => {
 
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
                 {users.length > 0 ? (
-                  <div className="overflow-x-auto">
-                    <table className="w-full">
-                        <thead className="bg-gray-50">
-                            <tr>
-                                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Name</th>
-                                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Email</th>
-                                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Role</th>
-                                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Status</th>
-                                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Phone</th>
-                                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-200">
-                            {users.map((userItem) => (
-                                <tr key={userItem.id} className="hover:bg-gray-50">
-                                    <td className="px-4 py-3 text-sm font-medium text-gray-800">{userItem.name}</td>
-                                    <td className="px-4 py-3 text-sm text-gray-600">{userItem.email}</td>
-                                    <td className="px-4 py-3 text-sm">
-                                        <span className={`px-2 py-1 rounded-full text-xs ${getRoleColor(userItem.role?.slug)}`}>
-                                            {userItem.role?.name || 'Unknown'}
-                                        </span>
-                                    </td>
-                                    <td className="px-4 py-3 text-sm">
-                                        <span className={`px-2 py-1 rounded-full text-xs ${
-                                            userItem.is_active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                                        }`}>
-                                            {userItem.is_active ? 'Active' : 'Inactive'}
-                                        </span>
-                                    </td>
-                                    <td className="px-4 py-3 text-sm text-gray-600">{userItem.phone || '—'}</td>
-                                    <td className="px-4 py-3 text-sm">
-                                        <div className="flex gap-2">
-                                            <button
-                                                onClick={() => openEditModal(userItem)}
-                                                className="text-blue-600 hover:text-blue-800 text-sm"
-                                            >
-                                                Edit
-                                            </button>
-                                            {userItem.is_active ? (
-                                                <button
-                                                    onClick={() => handleDeactivate(userItem.id)}
-                                                    className="text-red-600 hover:text-red-800 text-sm"
-                                                >
-                                                    Deactivate
-                                                </button>
-                                            ) : (
-                                                <button
-                                                    onClick={() => handleReactivate(userItem.id)}
-                                                    className="text-green-600 hover:text-green-800 text-sm"
-                                                >
-                                                    Reactivate
-                                                </button>
-                                            )}
-                                        </div>
-                                    </td>
+                    <div className="overflow-x-auto">
+                        <table className="w-full">
+                            <thead className="bg-gray-50">
+                                <tr>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Name</th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Email</th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Role</th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Status</th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Phone</th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Actions</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody className="divide-y divide-gray-200">
+                                {users.map((userItem) => (
+                                    <tr key={userItem.id} className="hover:bg-gray-50">
+                                        <td className="px-4 py-3 text-sm font-medium text-gray-800">{userItem.name}</td>
+                                        <td className="px-4 py-3 text-sm text-gray-600">{userItem.email}</td>
+                                        <td className="px-4 py-3 text-sm">
+                                            <span className={`px-2 py-1 rounded-full text-xs ${getRoleColor(userItem.role?.slug)}`}>
+                                                {userItem.role?.name || 'Unknown'}
+                                            </span>
+                                        </td>
+                                        <td className="px-4 py-3 text-sm">
+                                            <span className={`px-2 py-1 rounded-full text-xs ${
+                                                userItem.is_active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                                            }`}>
+                                                {userItem.is_active ? 'Active' : 'Inactive'}
+                                            </span>
+                                        </td>
+                                        <td className="px-4 py-3 text-sm text-gray-600">{userItem.phone || '—'}</td>
+                                        <td className="px-4 py-3 text-sm">
+                                            <div className="flex gap-2">
+                                                <button
+                                                    onClick={() => openEditModal(userItem)}
+                                                    className="text-blue-600 hover:text-blue-800 text-sm"
+                                                >
+                                                    Edit
+                                                </button>
+                                                {userItem.is_active ? (
+                                                    <button
+                                                        onClick={() => handleDeactivate(userItem.id)}
+                                                        className="text-red-600 hover:text-red-800 text-sm"
+                                                    >
+                                                        Deactivate
+                                                    </button>
+                                                ) : (
+                                                    <button
+                                                        onClick={() => handleReactivate(userItem.id)}
+                                                        className="text-green-600 hover:text-green-800 text-sm"
+                                                    >
+                                                        Reactivate
+                                                    </button>
+                                                )}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 ) : (
                     <div className="text-center py-12">
                         <p className="text-gray-500">No users found. Create your first user!</p>

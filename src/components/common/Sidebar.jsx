@@ -9,12 +9,13 @@ import {
   Settings,
   FileText,
   Bell,
-Calendar,
+  Calendar,
   LogOut,
   UserCircle,
+  X,
 } from 'lucide-react';
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onClose }) => {
   const { user, logout, isAdmin, isProjectManager } = useAuth();
   const location = useLocation();
 
@@ -23,20 +24,14 @@ const Sidebar = () => {
     window.location.href = '/login';
   };
 
-  const isActive = (path) => {
-    return location.pathname === path;
-  };
+  const isActive = (path) => location.pathname === path;
 
-  // Define all navigation items - NO DUPLICATES
   const navItems = [
     { path: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { path: '/projects', icon: FolderKanban, label: 'Projects' },
     { path: '/tasks', icon: CheckSquare, label: 'Tasks' },
-    { path: '/calendar', icon: Calendar, label: 'Calendar' },
-    { path: '/notification-preferences', icon: Bell, label: 'Preferences' },
   ];
 
-  // Add role-specific items only once
   if (isAdmin()) {
     navItems.push({ path: '/users', icon: Users, label: 'Users' });
     navItems.push({ path: '/admin', icon: Settings, label: 'Admin' });
@@ -46,19 +41,32 @@ const Sidebar = () => {
     navItems.push({ path: '/reports', icon: FileText, label: 'Reports' });
   }
 
-  // Remove any potential duplicates by filtering unique paths
+  // Add calendar for all logged-in users
+  navItems.push({ path: '/calendar', icon: Calendar, label: 'Calendar' });
+
+  // Remove duplicates
   const uniqueNavItems = navItems.filter((item, index, self) =>
     index === self.findIndex((t) => t.path === item.path)
   );
 
-  return (
-    <aside className="fixed left-0 top-0 h-full w-64 bg-[#1E3A5F] text-white flex flex-col shadow-xl z-50">
+  const sidebarContent = (
+    <aside className="h-full w-64 bg-[#1E3A5F] text-white flex flex-col shadow-xl">
       {/* Logo */}
-      <div className="flex items-center gap-3 px-6 py-6 border-b border-white/10">
-        <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
-          <span className="text-2xl font-bold text-white">T</span>
+      <div className="flex items-center justify-between px-6 py-6 border-b border-white/10">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
+            <span className="text-2xl font-bold text-white">T</span>
+          </div>
+          <span className="text-xl font-bold tracking-tight">TaskFlow</span>
         </div>
-        <span className="text-xl font-bold tracking-tight">TaskFlow</span>
+        {/* Close button (mobile) */}
+        <button
+          onClick={onClose}
+          className="lg:hidden p-1 rounded-md hover:bg-white/10 transition-colors"
+          aria-label="Close sidebar"
+        >
+          <X className="w-6 h-6 text-white/70" />
+        </button>
       </div>
 
       {/* Navigation */}
@@ -70,6 +78,7 @@ const Sidebar = () => {
             <Link
               key={item.path}
               to={item.path}
+              onClick={onClose}
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group ${
                 active
                   ? 'bg-white/20 text-white shadow-lg'
@@ -90,6 +99,7 @@ const Sidebar = () => {
       <div className="px-4 py-4 border-t border-white/10">
         <Link
           to="/profile"
+          onClick={onClose}
           className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-200 group"
         >
           <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">
@@ -121,6 +131,24 @@ const Sidebar = () => {
         </button>
       </div>
     </aside>
+  );
+
+  return (
+    <>
+      {/* Desktop: always visible */}
+      <div className="hidden lg:block fixed left-0 top-0 h-full z-50">
+        {sidebarContent}
+      </div>
+
+      {/* Mobile: slide-in from left */}
+      <div
+        className={`lg:hidden fixed inset-y-0 left-0 z-50 transform transition-transform duration-300 ease-in-out ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        {sidebarContent}
+      </div>
+    </>
   );
 };
 

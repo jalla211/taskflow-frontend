@@ -184,6 +184,7 @@ const Users = () => {
 
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
                 {users.length > 0 ? (
+                  <div className="overflow-x-auto">
                     <table className="w-full">
                         <thead className="bg-gray-50">
                             <tr>

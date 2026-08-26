@@ -289,7 +289,7 @@ const Reports = () => {
                     <div>
                         <h3 className="text-lg font-semibold text-[#1E3A5F] mb-4">Team Workload Report</h3>
                         <p className="text-gray-600">Workload distribution across team members.</p>
-                        <div className="overflow-x-auto mt-4">
+                        <div className="overflow-x-auto">
                             <table className="w-full text-sm">
                                 <thead className="bg-gray-50">
                                     <tr>

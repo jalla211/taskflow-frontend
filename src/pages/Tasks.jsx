@@ -219,6 +219,7 @@ const Tasks = () => {
                         )}
                     </div>
                 ) : (
+                      <div className="overflow-x-auto">
                     <table className="w-full">
                         <thead className="bg-gray-50">
                             <tr>
@@ -285,6 +286,7 @@ const Tasks = () => {
                             ))}
                         </tbody>
                     </table>
+                    </div>
                 )}
             </div>
 

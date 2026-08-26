@@ -59,15 +59,23 @@ const Profile = () => {
             if (selectedFile) {
                 const formDataFile = new FormData();
                 formDataFile.append('profile_picture', selectedFile);
-                await api.post('/profile/picture', formDataFile, {
+                const uploadResponse = await api.post('/profile/picture', formDataFile, {
                     headers: { 'Content-Type': 'multipart/form-data' },
                 });
-                // Clear the selected file after upload
+                // Get the path from response
+                const newPath = uploadResponse.data.profile_picture;
+                // Update user state with new picture path
+                setProfilePicture(newPath);
+                // Clear selected file
                 setSelectedFile(null);
                 setPreviewUrl('');
+                // Update user in context with new picture
+                const updatedUser = { ...user, profile_picture: newPath };
+                setUser(updatedUser);
+                localStorage.setItem('user', JSON.stringify(updatedUser));
             }
 
-            // 3. Refresh user data
+            // 3. Refresh user data (for any other changes)
             const response = await api.get('/me');
             const updatedUser = response.data.user;
             localStorage.setItem('user', JSON.stringify(updatedUser));
@@ -76,11 +84,6 @@ const Profile = () => {
 
             setSuccess('Profile updated successfully!');
             setLoading(false);
-
-            // Reload to reflect changes in navbar (or we can use context)
-            setTimeout(() => {
-                window.location.reload();
-            }, 1500);
 
         } catch (err) {
             setError(err.response?.data?.message || 'Failed to update profile');
@@ -102,6 +105,11 @@ const Profile = () => {
             </div>
         );
     }
+
+    // Full backend URL for profile picture
+    const imageUrl = profilePicture
+        ? `https://taskflow-backend-ck9g.onrender.com/storage/${profilePicture}`
+        : null;
 
     return (
         <div className="p-6 max-w-4xl mx-auto">
@@ -126,11 +134,16 @@ const Profile = () => {
                             <div className="w-32 h-32 rounded-full bg-[#1E3A5F] flex items-center justify-center text-white text-4xl font-bold overflow-hidden">
                                 {previewUrl ? (
                                     <img src={previewUrl} alt="Profile" className="w-full h-full object-cover" />
-                                ) : profilePicture ? (
+                                ) : imageUrl ? (
                                     <img
-                                        src={`https://taskflow-backend-ck9g.onrender.com/storage/${profilePicture}`}
+                                        src={imageUrl}
                                         alt="Profile"
                                         className="w-full h-full object-cover"
+                                        onError={(e) => {
+                                            // If image fails to load, show initials
+                                            e.target.style.display = 'none';
+                                            e.target.parentElement.textContent = getInitials(formData.name);
+                                        }}
                                     />
                                 ) : (
                                     <span>{getInitials(formData.name)}</span>

@@ -1,8 +1,30 @@
 @import "tailwindcss";
 
+@theme {
+  /* Inter for body/UI text, Sora for display headings — both actually
+     loaded via Google Fonts in index.html (previously named but never
+     fetched, so it silently fell back to the system font). */
+  --font-sans: 'Inter', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Sora', 'Inter', ui-sans-serif, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
+}
+
 body {
   background-color: #F5F7FA;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  font-family: var(--font-sans);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -22,19 +44,9 @@ body {
 
 
 
-/* ===== Login Page Background ===== */
-.login-wrapper {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #0b3b5c 0%, #2b7a9e 40%, #6db3d9 70%, #b5dffa 100%);
-  position: relative;
-  overflow: hidden;
-  padding: 1rem;
-}
-
-/* Floating Shapes */
+/* Decorative floating shapes used on gradient hero/CTA sections (Home,
+   Pricing, Login). Each usage sets its own size/position/background inline
+   so shapes are self-contained rather than relying on child-order CSS. */
 .floating-shape {
   position: absolute;
   border-radius: 50%;
@@ -44,144 +56,14 @@ body {
   backdrop-filter: blur(2px);
 }
 
-.floating-shape:nth-child(1) {
-  width: 180px;
-  height: 180px;
-  top: 10%;
-  left: 5%;
-  animation-delay: 0s;
-  background: rgba(255, 255, 255, 0.06);
-}
-.floating-shape:nth-child(2) {
-  width: 120px;
-  height: 120px;
-  bottom: 15%;
-  right: 8%;
-  animation-delay: 2s;
-  background: rgba(255, 255, 255, 0.10);
-}
-.floating-shape:nth-child(3) {
-  width: 250px;
-  height: 250px;
-  top: 50%;
-  left: 60%;
-  animation-delay: 4s;
-  background: rgba(255, 255, 255, 0.04);
-}
-.floating-shape:nth-child(4) {
-  width: 90px;
-  height: 90px;
-  bottom: 30%;
-  left: 20%;
-  animation-delay: 1s;
-  background: rgba(255, 255, 255, 0.12);
-}
-.floating-shape:nth-child(5) {
-  width: 150px;
-  height: 150px;
-  top: 15%;
-  right: 20%;
-  animation-delay: 3s;
-  background: rgba(255, 255, 255, 0.07);
-}
-.floating-shape:nth-child(6) {
-  width: 70px;
-  height: 70px;
-  bottom: 10%;
-  left: 45%;
-  animation-delay: 5s;
-  background: rgba(255, 255, 255, 0.15);
-}
-
 @keyframes floatUpDown {
   0% { transform: translateY(0px) scale(1) rotate(0deg); }
   50% { transform: translateY(-40px) scale(1.05) rotate(5deg); }
   100% { transform: translateY(0px) scale(1) rotate(0deg); }
 }
 
-/* Clouds */
-.cloud {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 50px;
-  filter: blur(2px);
-  pointer-events: none;
-  animation: cloudDrift 20s linear infinite;
-}
-.cloud:nth-child(7) {
-  width: 300px;
-  height: 60px;
-  top: 8%;
-  left: -100px;
-  animation-duration: 25s;
-}
-.cloud:nth-child(8) {
-  width: 400px;
-  height: 80px;
-  top: 25%;
-  right: -150px;
-  animation-duration: 30s;
-  animation-delay: 5s;
-}
-.cloud:nth-child(9) {
-  width: 250px;
-  height: 50px;
-  bottom: 20%;
-  left: -80px;
-  animation-duration: 22s;
-  animation-delay: 10s;
-}
-
-@keyframes cloudDrift {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(calc(100vw + 200px)); }
-}
-
-/* Glow behind card */
-.login-glow {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  animation: pulseGlow 6s ease-in-out infinite;
-}
-
-@keyframes pulseGlow {
-  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
-  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
-}
-
-/* Login card */
-.login-card {
-  position: relative;
-  z-index: 10;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(10px);
-  border-radius: 1.5rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.2);
-  width: 100%;
-  max-width: 420px;
-  padding: 2rem 1.5rem;
-  transition: transform 0.3s ease;
-}
-.login-card:hover {
-  transform: translateY(-2px);
-}
-
-/* Mobile responsive */
 @media (max-width: 640px) {
-  .login-card {
-    padding: 1.5rem 1rem;
-    max-width: 95%;
-  }
-  .floating-shape,
-  .cloud {
+  .floating-shape {
     display: none;
   }
 }

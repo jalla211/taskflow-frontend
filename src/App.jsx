@@ -5,6 +5,7 @@ import { NotificationProvider } from './context/NotificationContext';
 import Login from './components/auth/Login';
 import Layout from './components/common/Layout';
 import Home from './pages/Home';
+import Pricing from './pages/Pricing';
 import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
 import Tasks from './pages/Tasks';
@@ -39,6 +40,7 @@ function App() {
                 <Router>
                     <Routes>
                         <Route path="/" element={<Home />} />
+                        <Route path="/pricing" element={<Pricing />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                         <Route path="/projects" element={<ProtectedRoute><Projects /></ProtectedRoute>} />

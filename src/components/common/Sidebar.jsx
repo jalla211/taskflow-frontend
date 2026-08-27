@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import logo from '../../assets/logo-icon.png';
 import {
   LayoutDashboard,
   FolderKanban,
@@ -53,11 +54,11 @@ const Sidebar = ({ isOpen, onClose }) => {
     <aside className="h-full w-64 bg-[#1E3A5F] text-white flex flex-col shadow-xl">
       {/* Logo */}
       <div className="flex items-center justify-between px-6 py-6 border-b border-white/10">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
-            <span className="text-2xl font-bold text-white">T</span>
+        <div className="flex items-center gap-2.5">
+          <div className="bg-white rounded-lg p-1.5 flex-shrink-0">
+            <img src={logo} alt="" className="h-8 w-auto" />
           </div>
-          <span className="text-xl font-bold tracking-tight">TaskFlow</span>
+          <span className="text-lg font-bold tracking-tight">TaskManage</span>
         </div>
         {/* Close button (mobile) */}
         <button

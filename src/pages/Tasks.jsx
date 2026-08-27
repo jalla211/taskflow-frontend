@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import api from '../api/api';
 
@@ -27,9 +27,50 @@ const Tasks = () => {
 
     const canManageTasks = isAdmin() || isProjectManager() || isTeamLeader();
 
+    const [searchParams, setSearchParams] = useSearchParams();
+    const filterParam = searchParams.get('filter');
+    const autoOpenHandled = useRef(false);
+
     useEffect(() => {
         fetchAllData();
     }, []);
+
+    // Deep link from the dashboard's "Create Task" button (?new=1).
+    useEffect(() => {
+        if (!loading && !autoOpenHandled.current && searchParams.get('new') === '1' && canManageTasks) {
+            autoOpenHandled.current = true;
+            openCreateModal();
+            const next = new URLSearchParams(searchParams);
+            next.delete('new');
+            setSearchParams(next, { replace: true });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [loading]);
+
+    const visibleTasks = useMemo(() => {
+        if (!filterParam) return tasks;
+        if (filterParam === 'overdue') {
+            const now = new Date();
+            now.setHours(0, 0, 0, 0);
+            return tasks.filter((t) => {
+                if (!t.due_date) return false;
+                const statusName = t.status?.name?.toLowerCase() || '';
+                if (statusName.includes('complet') || statusName.includes('cancel')) return false;
+                return new Date(t.due_date) < now;
+            });
+        }
+        return tasks.filter((t) => t.status?.name?.toLowerCase() === filterParam.toLowerCase());
+    }, [tasks, filterParam]);
+
+    const clearFilter = () => {
+        const next = new URLSearchParams(searchParams);
+        next.delete('filter');
+        setSearchParams(next);
+    };
+
+    const filterLabel = filterParam === 'overdue' ? 'Overdue' : filterParam
+        ? filterParam.replace(/\b\w/g, (c) => c.toUpperCase())
+        : '';
 
     const fetchAllData = async () => {
         setLoading(true);
@@ -205,6 +246,17 @@ const Tasks = () => {
                 </div>
             )}
 
+            {filterParam && (
+                <div className="mb-4 flex items-center gap-2 text-sm">
+                    <span className="px-3 py-1 bg-[#1E3A5F]/10 text-[#1E3A5F] rounded-full font-medium">
+                        Filtered: {filterLabel}
+                    </span>
+                    <button onClick={clearFilter} className="text-gray-500 hover:text-gray-700 hover:underline">
+                        Clear filter
+                    </button>
+                </div>
+            )}
+
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
                 {tasks.length === 0 ? (
                     <div className="text-center py-12">
@@ -217,6 +269,13 @@ const Tasks = () => {
                                 Create your first task
                             </button>
                         )}
+                    </div>
+                ) : visibleTasks.length === 0 ? (
+                    <div className="text-center py-12">
+                        <p className="text-gray-500">No tasks match this filter.</p>
+                        <button onClick={clearFilter} className="mt-4 text-[#1E3A5F] hover:underline">
+                            Clear filter
+                        </button>
                     </div>
                 ) : (
                       <div className="overflow-x-auto">
@@ -233,7 +292,7 @@ const Tasks = () => {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
-                            {Array.isArray(tasks) && tasks.map((task) => (
+                            {visibleTasks.map((task) => (
                                 <tr key={task.id} className="hover:bg-gray-50">
                                     <td className="px-4 py-3 text-sm text-gray-800">
                                         <Link 

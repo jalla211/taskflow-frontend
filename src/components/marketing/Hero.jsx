@@ -82,6 +82,18 @@ const Hero = () => (
         className="relative overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #0b3b5c 0%, #2b7a9e 40%, #6db3d9 70%, #b5dffa 100%)' }}
     >
+        {/* Dot-grid texture, faded toward the edges — a CSS pattern instead of
+            a stock photo, so it stays crisp at any size and needs no asset. */}
+        <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+                backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 1.5px)',
+                backgroundSize: '32px 32px',
+                maskImage: 'radial-gradient(ellipse 70% 70% at 50% 40%, black 0%, transparent 80%)',
+                WebkitMaskImage: 'radial-gradient(ellipse 70% 70% at 50% 40%, black 0%, transparent 80%)',
+            }}
+        />
+
         <div className="floating-shape" style={{ width: 220, height: 220, top: '8%', left: '4%', animationDelay: '0s', background: 'rgba(255,255,255,0.06)' }} />
         <div className="floating-shape" style={{ width: 140, height: 140, bottom: '10%', right: '6%', animationDelay: '2.5s', background: 'rgba(255,255,255,0.10)' }} />
         <div className="floating-shape" style={{ width: 90, height: 90, top: '55%', left: '18%', animationDelay: '1.2s', background: 'rgba(255,255,255,0.12)' }} />

@@ -10,6 +10,22 @@ the React single-page frontend that talks to the [TaskManage backend API](#backe
   Manager, Team Leader, Team Member)
 - Projects, tasks, calendar, reports, notifications, and user management
 
+## Contents
+
+- [Tech stack](#tech-stack)
+- [Project structure](#project-structure)
+- [Getting started](#getting-started)
+- [Environment variables](#environment-variables)
+- [Authentication flow](#authentication-flow)
+- [Marketing homepage (`/`)](#marketing-homepage)
+- [Pricing page (`/pricing`)](#pricing-page-pricing)
+- [Login (`/login`)](#login-login)
+- [Dashboard (post-login home page)](#dashboard-post-login-home-page)
+- [Roles & permissions](#roles--permissions)
+- [Routing](#routing)
+- [Backend](#backend)
+- [Deployment](#deployment)
+
 ## Tech stack
 
 | Layer         | Choice |
@@ -32,7 +48,10 @@ src/
 ├── assets/
 │   ├── logo.png                 # Full lockup (icon + wordmark + tagline) — Login, homepage hero
 │   ├── logo-icon.png            # Icon mark only, square — Sidebar chip
-│   └── logo-wordmark.png        # Icon + wordmark, no tagline — Nav bars, Footer
+│   ├── logo-wordmark.png        # Icon + wordmark, no tagline — Nav bars, Footer
+│   └── avatars/                 # avatar-1..4.jpg — placeholder headshots for
+│                                 # SupportSection's "Meet the team", sourced from
+│                                 # randomuser.me (fake-user test data, not real staff)
 ├── components/
 │   ├── auth/
 │   │   └── Login.jsx          # Email/password login form
@@ -50,7 +69,7 @@ src/
 │   │   ├── CalendarSection.jsx, SearchSection.jsx
 │   │   ├── DashboardPreviewSection.jsx, ReportingSection.jsx
 │   │   ├── RolesSection.jsx, WhySection.jsx, HowItWorksSection.jsx
-│   │   ├── SecuritySection.jsx, FinalCta.jsx      # Home.jsx-only sections
+│   │   ├── SecuritySection.jsx, SupportSection.jsx, FinalCta.jsx  # Home.jsx-only
 │   │   ├── PricingHero.jsx, PricingTiers.jsx        # Pricing.jsx-only sections
 │   │   ├── PricingComparison.jsx, PricingFaq.jsx
 │   │   ├── SectionHeading.jsx  # shared eyebrow/title/subtitle block
@@ -150,14 +169,17 @@ See `.env.example`. The only variable the app reads is:
 
 ## Marketing homepage (`/`)
 
-`Home.jsx` composes 19 section components from `src/components/marketing/`
+`Home.jsx` composes 20 section components from `src/components/marketing/`
+(`Nav` and `Footer` plus 18 content sections, `SupportSection` among them)
 into the public, signed-out homepage. It's entirely static content (no API
 calls) built from a provided content spec — a few implementation notes:
 
 - Stats ("10,000+ tasks managed", "500+ teams"), the five customer
-  wordmarks (Acme, Nova, Vertex, Flow, Horizon), and the reporting/calendar
-  chart mockups are **illustrative placeholder data**, not real figures —
-  swap them for real numbers before this goes anywhere public-facing.
+  wordmarks (Acme, Nova, Vertex, Flow, Horizon), the reporting/calendar
+  chart mockups, and the `SupportSection` "Meet the team" cards (names,
+  roles, and photos — headshots are `randomuser.me` fake-test-user data,
+  not real staff) are all **illustrative placeholder content**, not real —
+  swap them for the real thing before this goes anywhere public-facing.
 - The nav's in-page links (`Features`, `Solutions`, `How It Works`) and most
   footer links scroll to the matching section (`#features`, `#solutions`,
   `#how-it-works`, `#collaboration`, `#calendar`, `#reporting`,
@@ -167,9 +189,8 @@ calls) built from a provided content spec — a few implementation notes:
   navigation. The footer's `Resources` column has no dedicated page, so its
   link just lands on the footer column itself.
 - Footer items with no backing page (`About`, `Contact`, `Careers`, `Blog`,
-  `Help Center`, `Documentation`, `Guides`, `FAQ`, `Privacy Policy`,
-  `Terms of Service`) render as plain (non-clickable) text rather than dead
-  links.
+  `Documentation`, `Guides`, `FAQ`, `Privacy Policy`, `Terms of Service`)
+  render as plain, non-clickable text rather than dead links.
 - "Start Free" / "Get Started Free" / "Contact Sales" all route to `/login`
   — there's no public self-serve signup or sales-contact flow in this app
   (users are provisioned by an Admin via `/users`), so `/login` is the only

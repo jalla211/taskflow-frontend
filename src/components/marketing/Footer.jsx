@@ -42,7 +42,12 @@ const columns = [
     {
         title: 'Resources',
         id: 'resources',
-        links: [{ label: 'Help Center' }, { label: 'Documentation' }, { label: 'Guides' }, { label: 'FAQ' }],
+        links: [
+            { label: 'Help Center', to: '/#support' },
+            { label: 'Documentation' },
+            { label: 'Guides' },
+            { label: 'FAQ' },
+        ],
     },
     {
         title: 'Legal',

@@ -20,6 +20,7 @@ import RolesSection from '../components/marketing/RolesSection';
 import WhySection from '../components/marketing/WhySection';
 import HowItWorksSection from '../components/marketing/HowItWorksSection';
 import SecuritySection from '../components/marketing/SecuritySection';
+import SupportSection from '../components/marketing/SupportSection';
 import FinalCta from '../components/marketing/FinalCta';
 import Footer from '../components/marketing/Footer';
 
@@ -52,6 +53,7 @@ const Home = () => {
             <WhySection />
             <HowItWorksSection />
             <SecuritySection />
+            <SupportSection />
             <FinalCta />
             <Footer />
         </div>

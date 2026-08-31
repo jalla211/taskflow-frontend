@@ -9,6 +9,7 @@ const navLinks = [
     { label: 'Solutions', to: '/#solutions' },
     { label: 'How It Works', to: '/#how-it-works' },
     { label: 'Pricing', to: '/pricing' },
+    { label: 'Support', to: '/#support' },
     { label: 'Resources', to: '/#resources' },
 ];
 
@@ -42,7 +43,7 @@ const Nav = () => {
                     <img src={logo} alt="TaskManage" className="h-9 w-auto" />
                 </Link>
 
-                <nav className="hidden lg:flex items-center gap-8">
+                <nav className="hidden lg:flex items-center gap-5">
                     {navLinks.map((link) => (
                         <Link
                             key={link.label}

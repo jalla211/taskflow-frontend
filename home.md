@@ -21,7 +21,7 @@ TaskManage
 
 ---
 
-# 2. Hero Section
+## 2. Hero Section
 
 ### Eyebrow
 
@@ -29,7 +29,7 @@ TaskManage
 
 ### Main Headline
 
-# Plan work. Track progress. Get things done.
+**Plan work. Track progress. Get things done.**
 
 ### Supporting Text
 
@@ -60,7 +60,7 @@ Show a modern dashboard preview containing:
 
 ---
 
-# 3. Social Proof
+## 3. Social Proof
 
 ### Trusted by teams that want to get more done
 
@@ -78,7 +78,7 @@ Acme        Nova        Vertex        Flow        Horizon
 
 ---
 
-# 4. Problem Section
+## 4. Problem Section
 
 ### Work shouldn't feel this complicated.
 
@@ -109,7 +109,7 @@ One workspace for your tasks, projects, people, deadlines, and progress.
 
 ---
 
-# 5. Value Proposition
+## 5. Value Proposition
 
 ### Everything your team needs to stay on track.
 
@@ -135,11 +135,11 @@ Stay ahead of deadlines and keep work moving toward completion.
 
 ---
 
-# 6. Features Section
+## 6. Features Section
 
-## Powerful task management without the complexity
+### Powerful task management without the complexity
 
-### Tasks that everyone understands
+#### Tasks that everyone understands
 
 Create tasks with the information your team needs.
 
@@ -160,7 +160,7 @@ The underlying system specification defines these core task attributes and suppo
 
 ---
 
-## Projects that stay on track
+#### Projects that stay on track
 
 Organize related work into projects and see progress at a glance.
 
@@ -175,7 +175,7 @@ Organize related work into projects and see progress at a glance.
 * Status
 * Tasks
 
-### Project progress
+##### Project progress
 
 **Website Redesign**
 
@@ -191,9 +191,9 @@ Project progress is based on the completion of associated tasks.
 
 ---
 
-# 7. Workflow Section
+## 7. Workflow Section
 
-## Move work forward, one step at a time.
+### Move work forward, one step at a time.
 
 TaskManage gives teams a clear workflow for every task.
 
@@ -225,25 +225,25 @@ Teams can track who changed a task, what changed, and when it happened.
 
 ---
 
-# 8. Team Collaboration
+## 8. Team Collaboration
 
-## Work together without losing the context.
+### Work together without losing the context.
 
 Keep conversations connected to the work.
 
-### Comments
+#### Comments
 
 Discuss tasks directly where the work happens.
 
-### Mentions
+#### Mentions
 
 Mention teammates when you need their attention.
 
-### Attachments
+#### Attachments
 
 Attach documents, images, specifications, and other files directly to tasks.
 
-### Activity History
+#### Activity History
 
 Keep a record of important task activity.
 
@@ -251,13 +251,13 @@ The system specification supports comments, mentions, discussion history, attach
 
 ---
 
-# 9. Smart Notifications
+## 9. Smart Notifications
 
-## Never miss what matters.
+### Never miss what matters.
 
 TaskManage keeps your team informed about important changes.
 
-### Get notified when:
+#### Get notified when:
 
 * A task is assigned to you.
 * A task is reassigned.
@@ -266,19 +266,19 @@ TaskManage keeps your team informed about important changes.
 * A deadline is approaching.
 * A task becomes overdue.
 
-### Stay informed. Not overwhelmed.
+#### Stay informed. Not overwhelmed.
 
 Customize your notification preferences and keep a history of notifications.
 
 ---
 
-# 10. Calendar Section
+## 10. Calendar Section
 
-## See your workload on the calendar.
+### See your workload on the calendar.
 
 Turn task deadlines into a clear schedule.
 
-### Calendar features
+#### Calendar features
 
 * View task deadlines.
 * Change task dates where authorized.
@@ -287,7 +287,7 @@ Turn task deadlines into a clear schedule.
 * Filter by assignee.
 * Support recurring tasks where required.
 
-### Example
+#### Example
 
 ```text
 MON       TUE       WED       THU       FRI
@@ -303,13 +303,13 @@ The system requirements include calendar-based task visualization and deadline m
 
 ---
 
-# 11. Search Section
+## 11. Search Section
 
-## Find what you need in seconds.
+### Find what you need in seconds.
 
 Stop searching through spreadsheets, emails, and chat messages.
 
-### Search by:
+#### Search by:
 
 **Task ID**
 
@@ -331,9 +331,9 @@ The source requirements explicitly include task search, filtering, sorting, and 
 
 ---
 
-# 12. Dashboard Section
+## 12. Dashboard Section
 
-## Know what's happening at a glance.
+### Know what's happening at a glance.
 
 Your personalized dashboard gives you a clear picture of your workload.
 
@@ -349,7 +349,7 @@ COMPLETED          6
 OVERDUE            2
 ```
 
-### See more than numbers.
+#### See more than numbers.
 
 Track:
 
@@ -364,13 +364,13 @@ The dashboard requirements specifically include personalized dashboards, task st
 
 ---
 
-# 13. Reporting & Analytics
+## 13. Reporting & Analytics
 
-## Turn work data into better decisions.
+### Turn work data into better decisions.
 
 Managers can understand team performance and identify bottlenecks.
 
-### Track metrics such as:
+#### Track metrics such as:
 
 * Tasks created
 * Tasks completed
@@ -381,7 +381,7 @@ Managers can understand team performance and identify bottlenecks.
 * Tasks by employee
 * Project completion percentage
 
-### Example
+#### Example
 
 ```text
 Tasks Completed This Month
@@ -400,29 +400,29 @@ The specification includes task completion, overdue, project progress, workload,
 
 ---
 
-# 14. Built for Every Team
+## 14. Built for Every Team
 
-## One platform. Different roles. One shared goal.
+### One platform. Different roles. One shared goal.
 
-### For Team Members
+#### For Team Members
 
 Know exactly what you need to work on.
 
 **My Tasks · Deadlines · Priorities · Notifications**
 
-### For Team Leaders
+#### For Team Leaders
 
 Keep your team moving.
 
 **Assignments · Team Progress · Workload**
 
-### For Project Managers
+#### For Project Managers
 
 Stay ahead of projects.
 
 **Project Progress · Team Performance · Reports**
 
-### For Administrators
+#### For Administrators
 
 Control the platform.
 
@@ -432,45 +432,45 @@ The source specification defines these four user roles and role-based access req
 
 ---
 
-# 15. Why TaskManage?
+## 15. Why TaskManage?
 
-## Less chasing. More doing.
+### Less chasing. More doing.
 
-### One source of truth
+#### One source of truth
 
 Everyone works from the same tasks, projects, deadlines, and updates.
 
-### Clear ownership
+#### Clear ownership
 
 Every task has an owner and a clear responsibility.
 
-### Complete visibility
+#### Complete visibility
 
 Know what's happening across your projects and teams.
 
-### Better accountability
+#### Better accountability
 
 Track important changes and activity throughout the task lifecycle.
 
-### Fewer missed deadlines
+#### Fewer missed deadlines
 
 Get reminders before work becomes overdue.
 
 ---
 
-# 16. How It Works
+## 16. How It Works
 
-## Get your team organized in three simple steps.
+### Get your team organized in three simple steps.
 
-### 01 — Create your workspace
+#### 01 — Create your workspace
 
 Set up your team and projects.
 
-### 02 — Add and assign work
+#### 02 — Add and assign work
 
 Create tasks, set priorities, assign owners, and define deadlines.
 
-### 03 — Track and deliver
+#### 03 — Track and deliver
 
 Monitor progress, collaborate with your team, and complete the work.
 
@@ -488,9 +488,9 @@ COMPLETE
 
 ---
 
-# 17. Security & Accountability
+## 17. Security & Accountability
 
-## Every important action stays traceable.
+### Every important action stays traceable.
 
 TaskManage maintains activity history for important task changes.
 
@@ -506,9 +506,9 @@ This supports accountability and traceability throughout the task lifecycle.
 
 ---
 
-# 18. Final CTA
+## 18. Final CTA
 
-## Ready to get your work under control?
+### Ready to get your work under control?
 
 Bring your tasks, projects, and team into one workspace.
 
@@ -524,7 +524,7 @@ Start organizing your team's work today.
 
 ---
 
-# 19. Footer
+## 19. Footer
 
 ### TaskManage
 

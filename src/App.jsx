@@ -4,6 +4,8 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { NotificationProvider } from './context/NotificationContext';
 import Login from './components/auth/Login';
 import Layout from './components/common/Layout';
+import Home from './pages/Home';
+import Pricing from './pages/Pricing';
 import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
 import Tasks from './pages/Tasks';
@@ -37,6 +39,8 @@ function App() {
             <NotificationProvider>
                 <Router>
                     <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/pricing" element={<Pricing />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                         <Route path="/projects" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
@@ -49,8 +53,7 @@ function App() {
                         <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
                         <Route path="/notification-preferences" element={<ProtectedRoute><NotificationPreferences /></ProtectedRoute>} />
                         <Route path="/calendar" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
-                        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+                        <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
                 </Router>
             </NotificationProvider>
